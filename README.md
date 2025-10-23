@@ -1,71 +1,79 @@
 # Agile Product Analytics Dashboard
 
-Agile Product Analytics Dashboard is a Next.js application that showcases product KPIs for a hypothetical food delivery platform. The dashboard combines card-based summaries, interactive charts, and conversion funnel insights driven by mock data generators so you can prototype analytics experiences quickly.
+Agile Product Analytics Dashboard is a data visualization experience built with Next.js 15 and Tailwind CSS. It showcases key performance indicators (KPIs) for a food-delivery product, including conversion, retention, customer sentiment, and engagement insights. Charts, KPI cards, and narrative insights are powered by mock data that can be swapped for live analytics sources.
 
 ## Features
-- **Executive snapshot**: KPI cards surface conversion, retention, satisfaction, and engagement deltas at a glance with directional indicators.
-- **Rich visualizations**: Line, bar, and pie charts built with Recharts illustrate order trends, churn distribution, and NPS sentiment.
-- **Conversion insights**: A custom CSS funnel highlights drop-off across the acquisition journey to identify optimization opportunities.
-- **Theme-ready UI kit**: A library of shadcn-inspired components and Tailwind theming primitives accelerates feature development while maintaining visual consistency.
+- 📊 **Comprehensive KPIs** – Track revenue, orders, conversion rate, and repeat rate with visually rich KPI cards.
+- 📈 **Interactive Charts** – Line, bar, and pie charts powered by Recharts highlight growth, churn, and NPS trends.
+- 🌗 **Dark mode ready** – Theme configuration is wired up with `next-themes`, Tailwind CSS variables, and global styles.
+- ⚙️ **Modular components** – Reusable UI primitives (buttons, dropdowns, dialogs, etc.) based on shadcn/ui conventions.
+- 🚀 **Production friendly** – Includes Vercel Analytics integration and is optimized for deployment on Vercel or any Node.js host.
 
 ## Tech Stack
-- [Next.js 15 App Router](https://nextjs.org/) with global layout metadata and analytics wiring.
-- [React 19](https://react.dev/) + [TypeScript 5](https://www.typescriptlang.org/) for strongly typed component development.
-- [Tailwind CSS 4](https://tailwindcss.com/) for utility-first styling and design tokens.
-- [Recharts](https://recharts.org/) for responsive charting primitives.
-- [next-themes](https://github.com/pacocoursey/next-themes) for light/dark theme management.
+- [Next.js 15 App Router](https://nextjs.org/) with React 19 and TypeScript 5.
+- [Tailwind CSS 4](https://tailwindcss.com/) with custom design tokens and dark-mode variants.
+- [Recharts](https://recharts.org/) for data visualizations.
+- [Lucide](https://lucide.dev/) icons and [next-themes](https://github.com/pacocoursey/next-themes) for theming support.
+- `pnpm` for dependency management (lockfile included).
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18.18 or newer
+- pnpm 8 or newer (`corepack enable` is recommended)
+
+### Installation
+```bash
+pnpm install
+```
+
+### Development
+Start the development server on [http://localhost:3000](http://localhost:3000):
+```bash
+pnpm dev
+```
+
+### Production Build
+Create an optimized build and serve it locally:
+```bash
+pnpm build
+pnpm start
+```
+
+### Linting
+Run ESLint checks:
+```bash
+pnpm lint
+```
 
 ## Project Structure
 ```
-app/
-  layout.tsx        # Global metadata, font configuration, Vercel Analytics
-  page.tsx          # Dashboard page assembling KPI cards, charts, and insights
-  globals.css       # Tailwind layers, CSS variables, and dark-mode theming
-components/
-  kpi-card.tsx      # KPI metric card with trend indicators
-  conversion-funnel.tsx
-  churn-chart.tsx
-  nps-chart.tsx
-  orders-chart.tsx
-  theme-provider.tsx
-  ui/               # shadcn/ui-derived primitives (button, dialog, table, etc.)
-lib/
-  mock-data.ts      # Mock KPI/time-series/funnel data generators
-  utils.ts          # Utility helpers (e.g., className merging)
-public/
-  *                 # Placeholder assets (logos, avatars)
-styles/
-  globals.css       # Tailwind import shim for compatibility
+app/               # App Router entrypoints, layout, and global styles
+components/        # Feature components and UI primitives (shadcn/ui inspired)
+hooks/             # Reusable React hooks
+lib/               # Mock data generators and shared utilities
+public/            # Static assets (logos, avatars, favicons)
+scripts/           # Automation and helper scripts
+styles/            # Additional global stylesheet entrypoints
 ```
 
-## Getting Started
-1. **Install dependencies**
-   ```bash
-   pnpm install
-   ```
-2. **Run the development server**
-   ```bash
-   pnpm dev
-   ```
-   Visit `http://localhost:3000` to explore the dashboard. Hot module replacement is enabled out of the box.
-3. **Run quality checks**
-   ```bash
-   pnpm lint
-   pnpm build
-   ```
+## Data Model Overview
+- `lib/mock-data.ts` exposes helpers such as `getKPIData`, `getTimeSeriesData`, `getChurnData`, and `getNPSData` for generating synthetic analytics.
+- `app/page.tsx` composes KPI cards and chart components with the mock data sources.
+- Visualization components under `components/` (e.g., `orders-chart.tsx`, `churn-chart.tsx`, `nps-chart.tsx`, `conversion-funnel.tsx`) render the dashboard UI.
 
-> **Tip:** The repository ships with a `pnpm-lock.yaml`. Using `pnpm` is recommended to guarantee dependency parity.
-
-## Data & Customization
-- Update or replace the mock data utilities in `lib/mock-data.ts` when connecting to a real analytics backend.
-- Extend the dashboard by composing existing UI primitives located in `components/ui/`.
-- Modify theme tokens in `app/globals.css` to tweak color palettes, typography, and radii across light/dark modes.
-- Wrap future pages with `components/theme-provider.tsx` once you introduce a theme toggle.
+## Customization Tips
+- Replace the mock data helpers in `lib/mock-data.ts` with API calls to connect real analytics data.
+- Adjust design tokens in `app/globals.css` to update theming, typography, and spacing.
+- Use the UI building blocks in `components/ui/` to extend the dashboard with new sections or interactions.
 
 ## Deployment
-1. Create a production build: `pnpm build`
-2. Start the server: `pnpm start`
-3. Deploy to your preferred platform (e.g., Vercel) by following its Next.js deployment guide.
+The app is ready for Vercel out of the box. Deploy by connecting this repository to Vercel or run:
+```bash
+pnpm build
+pnpm start
+```
+For containerized deployments, ensure the production build directory `.next` is included and that the Node.js version matches the prerequisites above.
 
 ## License
-This project is provided as-is without a specific license. Add a LICENSE file if you intend to distribute or open-source your modifications.
+This project is provided as-is for educational and demonstration purposes. Review repository policies or contact the maintainers before using it in production.
